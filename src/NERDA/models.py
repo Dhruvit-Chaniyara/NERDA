@@ -170,7 +170,7 @@ class NERDA:
         self.tag_encoder = sklearn.preprocessing.LabelEncoder()
         self.tag_encoder.fit(tag_complete)
         self.transformer_model = AutoModel.from_pretrained(transformer)
-        self.transformer_tokenizer = AutoTokenizer.from_pretrained(transformer, **tokenizer_parameters)
+        self.transformer_tokenizer = AutoTokenizer.from_pretrained(transformer, **tokenizer_parameters,  use_fast=False)
         self.transformer_config = AutoConfig.from_pretrained(transformer)  
         self.network = NERDANetwork(self.transformer_model, self.device, len(tag_complete), dropout = dropout)
         self.network.to(self.device)
